@@ -3,9 +3,8 @@ builder = "DOCKERFILE"
 dockerfilePath = "Dockerfile"
 
 [deploy]
-startCommand = "ttyd --port 7681 --credential user:password login -f user"
 restartPolicyType = "ON_FAILURE"
 restartPolicyMaxRetries = 10
 
 [[ports]]
-port = "7681"
+auto = true
