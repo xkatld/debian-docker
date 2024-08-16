@@ -48,25 +48,43 @@ autostart=true
 autorestart=true
 EOL
 
-# 创建一个简单的管理脚本
+# 创建一个改进的管理脚本
 cat > /usr/local/bin/manage-services <<EOL
 #!/bin/bash
 
+SUPERVISORD=/usr/bin/supervisord
+SUPERVISORCTL=/usr/bin/supervisorctl
+CONFIG=/etc/supervisor/supervisord.conf
+
 case \$1 in
     start)
-        supervisord
+        if ! pgrep supervisord > /dev/null; then
+            echo "Starting supervisord..."
+            \$SUPERVISORD -c \$CONFIG
+        else
+            echo "supervisord is already running."
+        fi
         ;;
     stop)
-        supervisorctl stop all
-        killall supervisord
+        if pgrep supervisord > /dev/null; then
+            echo "Stopping all services and supervisord..."
+            \$SUPERVISORCTL -c \$CONFIG stop all
+            \$SUPERVISORCTL -c \$CONFIG shutdown
+        else
+            echo "supervisord is not running."
+        fi
         ;;
     restart)
-        supervisorctl stop all
-        killall supervisord
-        supervisord
+        \$0 stop
+        sleep 2
+        \$0 start
         ;;
     status)
-        supervisorctl status
+        if pgrep supervisord > /dev/null; then
+            \$SUPERVISORCTL -c \$CONFIG status
+        else
+            echo "supervisord is not running."
+        fi
         ;;
     *)
         echo "Usage: \$0 {start|stop|restart|status}"
@@ -77,8 +95,5 @@ EOL
 
 # 使管理脚本可执行
 chmod +x /usr/local/bin/manage-services
-
-# 启动supervisord
-supervisord
 
 echo "安装完成。使用 'manage-services {start|stop|restart|status}' 来管理服务。"
