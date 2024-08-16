@@ -1,0 +1,5 @@
+name: debian-ssh
+service:
+  ports:
+    - port: 22
+      protocol: tcp
