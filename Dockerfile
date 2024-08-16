@@ -9,6 +9,7 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # 安装webssh
+RUN rm /usr/lib/python3.11/EXTERNALLY-MANAGED
 RUN pip3 install webssh
 
 # 设置SSH
