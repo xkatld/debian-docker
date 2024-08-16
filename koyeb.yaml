@@ -1,5 +1,5 @@
-name: debian-ssh
+name: debian-webssh
 service:
   ports:
-    - port: 22
-      protocol: tcp
+    - port: 8888
+      http: true
