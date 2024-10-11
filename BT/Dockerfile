@@ -4,4 +4,4 @@ FROM xkatld/bt-centos9-image:light
 EXPOSE 5230
 
 # 启动 bt 服务并保持容器运行
-CMD ["bt", "1", "&"] 
+CMD ["sh", "-c", "bt 3 && tail -f /dev/null"]
