@@ -3,5 +3,5 @@ FROM fsynet/bt
 # 暴露 ttyd 端口
 EXPOSE 8000
 
-# 重启 bt
-CMD ["bt", "1"] 
+# 保持容器运行
+CMD ["tail", "-f", "/dev/null"]
