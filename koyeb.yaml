@@ -3,7 +3,3 @@ service:
   ports:
     - port: 7681
       http: true
-    - port: 8080
-      http: true
-    - port: 8081
-      http: true
