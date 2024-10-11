@@ -1,12 +1,7 @@
 FROM xkatld/bt-centos9-image:light
 
 # 安装必要的软件包
-RUN dnf update && dnf install -y \
-    curl \
-    wget \
-    sudo \
-    && dnf clean \
-    && rm -rf /var/lib/apt/lists/*
+RUN dnf update -y
 
 # 安装 ttyd
 RUN wget https://github.com/tsl0922/ttyd/releases/download/1.7.3/ttyd.x86_64 -O /usr/bin/ttyd \
