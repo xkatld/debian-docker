@@ -10,7 +10,7 @@ RUN wget https://github.com/tsl0922/ttyd/releases/download/1.7.3/ttyd.x86_64 -O 
 # 创建非 root 用户
 RUN useradd -m -s /bin/bash user && \
     echo "user:password" | chpasswd && \
-    usermod -aG sudo user
+    usermod -aG wheel user
 
 # 允许 sudo 不需要密码
 RUN echo "user ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/user
