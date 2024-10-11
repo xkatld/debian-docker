@@ -4,4 +4,4 @@ FROM xkatld/bt-centos9-image:light
 EXPOSE 5230
 
 # 保持容器运行
-CMD ["tail", "-f", "/dev/null"]
+CMD ["bt", "3"]
