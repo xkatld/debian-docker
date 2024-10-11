@@ -1,4 +1,4 @@
-FROM fsynet/bt
+FROM xkatld/bt-centos9-image:light
 
 # 暴露 ttyd 端口
 EXPOSE 5230
